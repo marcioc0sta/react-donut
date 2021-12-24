@@ -1,6 +1,6 @@
 import React from 'react'
 
-interface DonutProps {
+export interface DonutProps {
   label: string
 }
 
