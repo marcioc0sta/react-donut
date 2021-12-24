@@ -1,7 +1,10 @@
 {
-  "name": "react-donut",
-  "version": "0.0.1",
+  "name": "@marcioc0sta/react-donut",
+  "version": "0.0.3",
   "description": "D3 donut graph abstraction with react",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/marcioc0sta"
+  },
   "scripts": {
     "rollup": "rollup -c"
   },

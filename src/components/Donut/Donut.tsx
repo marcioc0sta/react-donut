@@ -4,6 +4,8 @@ interface DonutProps {
   label: string
 }
 
-export const Donut: React.FC<DonutProps> = ({ label }) => {
+const Donut: React.FC<DonutProps> = ({ label }) => {
   return <div>{label}</div>
 }
+
+export default Donut

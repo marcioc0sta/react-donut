@@ -1,1 +1,1 @@
-export * from './components/Donut'
+export * from './components'
