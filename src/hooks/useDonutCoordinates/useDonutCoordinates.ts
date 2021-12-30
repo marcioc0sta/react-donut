@@ -15,15 +15,9 @@ export interface DonutCoordinates {
 
 type Section = { value: number; rawValue: number }
 
-const useDonutCoordinates = ({
-  invertData = false,
-  donutRadius = 160,
-  donutInnerRadius = 20,
-  parsedData = [
-    { slug: 'a', title: 'A data', value: 1, rawValue: 1 },
-    { slug: 'b', title: 'B data', value: 3, rawValue: 3 },
-  ],
-}: DonutCoordinates) => {
+const useDonutCoordinates = (config: DonutCoordinates) => {
+  const { invertData, donutRadius, donutInnerRadius, parsedData } = config
+
   const activeArcProperties = {
     INNER_RADIUS: (rad: number) => rad - 20, //increase size from center > outside
     OUTER_RADIUS: (rad: number) => rad + 5, //increase size from+ 5, //increase size from center > inside
