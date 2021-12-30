@@ -1,6 +1,5 @@
 import * as d3 from 'd3'
-
-type Pie = { value: number; rawValue: number }
+import { PieArcDatum } from 'd3'
 
 export interface DonutCoordinates {
   invertData: boolean
@@ -14,6 +13,8 @@ export interface DonutCoordinates {
   }>
 }
 
+type Section = { value: number; rawValue: number }
+
 const useDonutCoordinates = ({
   invertData = false,
   donutRadius = 160,
@@ -24,24 +25,24 @@ const useDonutCoordinates = ({
   ],
 }: DonutCoordinates) => {
   const activeArcProperties = {
-    INNER_RADIUS: (rad: number): number => rad - 20, //increase size from center > outside
-    OUTER_RADIUS: (rad: number): number => rad - 20, //increase size from+ 5, //increase size from center > inside
+    INNER_RADIUS: (rad: number) => rad - 20, //increase size from center > outside
+    OUTER_RADIUS: (rad: number) => rad + 5, //increase size from+ 5, //increase size from center > inside
   }
 
   const radius = Math.min(donutRadius, donutRadius) / 2
 
   const arc = d3
-    .arc()
+    .arc<PieArcDatum<Section>>()
     .innerRadius(radius - donutInnerRadius)
     .outerRadius(radius)
 
   const activeArc = d3
-    .arc()
+    .arc<PieArcDatum<Section>>()
     .innerRadius(activeArcProperties.INNER_RADIUS(radius))
     .outerRadius(activeArcProperties.OUTER_RADIUS(radius))
 
   const sectionAngles = d3
-    .pie<Pie>()
+    .pie<Section>()
     .value(function (data) {
       return data.value
     })
