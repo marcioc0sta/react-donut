@@ -63,12 +63,12 @@ const Donut: React.FC<DonutProps> = ({
     <div style={{ position: 'relative' }}>
       <svg width='180' height='180'>
         <g style={{ transform: 'translate(90px, 90px)' }}>
-          {sectionAngles.map(section => {
+          {sectionAngles.map((section: any) => {
             return (
               <path
                 key={section.data.slug}
                 fill={sectionColors[sectionAngleColorIndex(section)]}
-                d={arc(section)}
+                d={arc(section) || ''}
               />
             )
           })}
