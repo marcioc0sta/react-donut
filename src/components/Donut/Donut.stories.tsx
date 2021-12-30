@@ -10,7 +10,19 @@ export default {
 
 const Template: ComponentStory<typeof Donut> = args => <Donut {...args} />
 
-export const HelloWorld = Template.bind({})
-HelloWorld.args = {
-  label: 'Hello world!',
+export const Default = Template.bind({})
+Default.args = {
+  sectionColors: ['cyan', 'pink'],
+  donutData: [
+    {
+      slug: 'example-1',
+      label: 'A value',
+      value: 100,
+    },
+    {
+      slug: 'example-2',
+      label: 'B value',
+      value: 300,
+    },
+  ],
 }

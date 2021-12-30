@@ -1,51 +1,38 @@
 import React, { useMemo, memo, useRef, useState } from 'react'
 import { useDonutCoordinates } from '../../hooks'
-
-export interface DonutProps {
-  label: string
-}
+import {
+  D3parse,
+  DataToParse,
+  DonutProps,
+  DonutSectionObject,
+} from './Donut.types'
 
 const sectionOpacityAmount = {
   ACTIVE: '1',
   INACTIVE: '0.6',
 }
 
-const donutData = [
-  {
-    slug: 'example-1',
-    valueName: 'A value',
-    value: 100,
-  },
-  {
-    slug: 'example-2',
-    valueName: 'B value',
-    value: 300,
-  },
-]
-
-const sectionColors = ['cyan', 'pink']
-
-const Donut: React.FC<DonutProps> = ({ label }) => {
+const Donut: React.FC<DonutProps> = ({ sectionColors, donutData }) => {
   const donutRadius = 140
   const donutInnerRadius = 15
 
-  const parseData = data => {
-    const valuesArr = data.map(item => item.value)
+  const parseData = (data: DataToParse): D3parse => {
+    const valuesArr = data.map((item: DonutSectionObject) => item.value)
     const total = valuesArr.reduce((accum, current) => accum + current)
 
-    const getDonutVal = val => (val * donutRadius) / total
+    const getDonutVal = (val: number) => (val * donutRadius) / total
 
     const parsedData = data.map(item => ({
       slug: item.slug,
-      title: item.valueName,
+      title: item.label,
       value: getDonutVal(item.value),
       rawValue: item.value,
     }))
 
-    return [parsedData, total]
+    return { parsedData, total }
   }
 
-  const [parsedData, total] = useMemo(() => parseData(donutData), [donutData])
+  const { parsedData, total } = useMemo(() => parseData(donutData), [donutData])
 
   const [arc, activeArc, sectionAngles] = useDonutCoordinates({
     invertData: false,
@@ -72,7 +59,7 @@ const Donut: React.FC<DonutProps> = ({ label }) => {
           })}
         </g>
       </svg>
-      {total} === {parsedData[0].rawValue} - {parsedData[1].rawValue}
+      {total} === {parsedData[0].rawValue} + {parsedData[1].rawValue}
     </div>
   )
 }

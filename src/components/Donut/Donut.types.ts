@@ -1,0 +1,14 @@
+export type DonutSectionObject = { slug: string; value: number; label: string }
+export type ParsedDataObject = {
+  slug: string
+  title: string
+  value: number
+  rawValue: number
+}
+export type DataToParse = DonutProps['donutData']
+export type D3parse = { parsedData: Array<ParsedDataObject>; total: number }
+
+export interface DonutProps {
+  sectionColors: Array<string>
+  donutData: Array<DonutSectionObject>
+}

@@ -6,6 +6,8 @@
     "registry": "https://npm.pkg.github.com/marcioc0sta"
   },
   "scripts": {
+    "predeploy": "npm run build-storybook",
+    "deploy-storybook": "gh-pages -d storybook-static",
     "pre-publish": "npm run rollup",
     "publish": "npm run publish",
     "rollup": "rollup -c",
@@ -21,7 +23,7 @@
   "bugs": {
     "url": "https://github.com/marcioc0sta/react-donut/issues"
   },
-  "homepage": "https://github.com/marcioc0sta/react-donut#readme",
+  "homepage": "https://github.com/marcioc0sta/react-donut",
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@rollup/plugin-commonjs": "^21.0.1",
@@ -38,6 +40,7 @@
     "@types/d3": "^7.1.0",
     "@types/react": "^17.0.38",
     "babel-loader": "^8.2.3",
+    "gh-pages": "^3.2.3",
     "rollup": "^2.62.0",
     "rollup-plugin-dts": "^4.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
