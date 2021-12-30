@@ -5,14 +5,29 @@ import {
   DataToParse,
   DonutProps,
   DonutSectionObject,
+  ParsedDataObject,
 } from './Donut.types'
+
+type SectionType = {
+  data: ParsedDataObject
+  endAngle: number
+  index: number
+  padAngle: number
+  startAngle: number
+  value: number
+}
 
 const sectionOpacityAmount = {
   ACTIVE: '1',
   INACTIVE: '0.6',
 }
 
-const Donut: React.FC<DonutProps> = ({ sectionColors, donutData }) => {
+const Donut: React.FC<DonutProps> = ({
+  sectionColors,
+  donutData,
+  totalClassName,
+  withTotal,
+}) => {
   const donutRadius = 140
   const donutInnerRadius = 15
 
@@ -34,18 +49,18 @@ const Donut: React.FC<DonutProps> = ({ sectionColors, donutData }) => {
 
   const { parsedData, total } = useMemo(() => parseData(donutData), [donutData])
 
-  const [arc, activeArc, sectionAngles] = useDonutCoordinates({
+  const { arc, activeArc, sectionAngles } = useDonutCoordinates({
     invertData: false,
     donutRadius,
     donutInnerRadius,
     parsedData,
   })
 
-  const sectionAngleColorIndex = currentSection =>
+  const sectionAngleColorIndex = (currentSection: SectionType) =>
     donutData.findIndex(item => currentSection.data.slug === item.slug)
 
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
       <svg width='180' height='180'>
         <g style={{ transform: 'translate(90px, 90px)' }}>
           {sectionAngles.map(section => {
@@ -59,7 +74,19 @@ const Donut: React.FC<DonutProps> = ({ sectionColors, donutData }) => {
           })}
         </g>
       </svg>
-      {total} === {parsedData[0].rawValue} + {parsedData[1].rawValue}
+      {withTotal && (
+        <p
+          className={totalClassName}
+          style={{
+            position: 'absolute',
+            top: '80px',
+            left: '80px',
+            margin: '0',
+          }}
+        >
+          {total}
+        </p>
+      )}
     </div>
   )
 }

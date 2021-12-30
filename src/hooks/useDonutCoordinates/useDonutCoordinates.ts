@@ -13,7 +13,7 @@ export interface DonutCoordinates {
   }>
 }
 
-type Section = { value: number; rawValue: number }
+export type Section = { value: number; rawValue: number }
 
 const useDonutCoordinates = (config: DonutCoordinates) => {
   const { invertData, donutRadius, donutInnerRadius, parsedData } = config
@@ -47,7 +47,7 @@ const useDonutCoordinates = (config: DonutCoordinates) => {
       return current.rawValue - next.rawValue
     })(parsedData)
 
-  return [arc, activeArc, sectionAngles]
+  return { arc, activeArc, sectionAngles }
 }
 
 export default useDonutCoordinates

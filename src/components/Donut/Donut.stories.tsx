@@ -12,6 +12,8 @@ const Template: ComponentStory<typeof Donut> = args => <Donut {...args} />
 
 export const Default = Template.bind({})
 Default.args = {
+  withTotal: false,
+  totalClassName: 'yourClassName',
   sectionColors: ['cyan', 'pink'],
   donutData: [
     {
