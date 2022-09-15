@@ -1,21 +1,13 @@
-import React, { useMemo, memo, useState } from 'react'
+import React, { useMemo, memo, useState, FunctionComponent } from 'react'
 import { useDonutCoordinates } from '../../hooks'
+import TotalValue from '../TotalValue'
 import {
   D3parse,
   DataToParse,
   DonutProps,
   DonutSectionObject,
-  ParsedDataObject,
+  SectionType,
 } from './Donut.types'
-
-type SectionType = {
-  data: ParsedDataObject
-  endAngle: number
-  index: number
-  padAngle: number
-  startAngle: number
-  value: number
-}
 
 const sectionOpacityAmount = {
   ACTIVE: '1',
@@ -38,7 +30,7 @@ const parseData = (data: DataToParse, donutRadius: number): D3parse => {
   return { parsedData, total }
 }
 
-const Donut: React.FC<DonutProps> = ({
+const Donut: FunctionComponent<DonutProps> = ({
   sectionColors,
   donutData,
   totalClassName,
@@ -100,17 +92,7 @@ const Donut: React.FC<DonutProps> = ({
         </g>
       </svg>
       {withTotal && (
-        <p
-          className={totalClassName}
-          style={{
-            position: 'absolute',
-            top: '80px',
-            left: '80px',
-            margin: '0',
-          }}
-        >
-          {total}
-        </p>
+        <TotalValue totalClassName={totalClassName} total={total} />
       )}
     </div>
   )

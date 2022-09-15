@@ -1,4 +1,5 @@
 export type DonutSectionObject = { slug: string; value: number; label: string }
+
 export type ParsedDataObject = {
   slug: string
   title: string
@@ -13,4 +14,13 @@ export interface DonutProps {
   donutData: Array<DonutSectionObject>
   withTotal: boolean
   totalClassName: string
+}
+
+export type SectionType = {
+  data: ParsedDataObject
+  endAngle: number
+  index: number
+  padAngle: number
+  startAngle: number
+  value: number
 }
