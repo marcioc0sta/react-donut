@@ -4,14 +4,15 @@ import { TotalValueProps } from './TotalValue.types'
 const TotalValue: FunctionComponent<TotalValueProps> = ({
   totalClassName,
   total,
+  coordinates,
 }) => {
   return (
     <p
       className={totalClassName}
       style={{
         position: 'absolute',
-        top: '80px',
-        left: '80px',
+        top: coordinates,
+        left: coordinates,
         margin: '0',
       }}
     >

@@ -74,7 +74,11 @@ const Donut: FunctionComponent<DonutProps> = ({
         </g>
       </svg>
       {withTotal && (
-        <TotalValue totalClassName={totalClassName} total={total} />
+        <TotalValue
+          coordinates={`${svgArea / 2 - 10}px`}
+          totalClassName={totalClassName}
+          total={total}
+        />
       )}
     </div>
   )
