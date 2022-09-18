@@ -10,9 +10,10 @@ const Donut: FunctionComponent<DonutProps> = ({
   donutData,
   totalClassName = 'total',
   withTotal = true,
+  donutRadius = 140,
+  donutInnerRadius = 15,
+  svgArea = 180,
 }) => {
-  const donutRadius = 140
-  const donutInnerRadius = 15
   const [activeSection, setActiveSection] = useState<string>('')
 
   const { parsedData, total } = useMemo(
@@ -50,8 +51,12 @@ const Donut: FunctionComponent<DonutProps> = ({
 
   return (
     <div style={{ position: 'relative' }}>
-      <svg width='180' height='180'>
-        <g style={{ transform: 'translate(90px, 90px)' }}>
+      <svg width={svgArea} height={svgArea}>
+        <g
+          style={{
+            transform: `translate(${svgArea / 2}px, ${svgArea / 2}px)`,
+          }}
+        >
           {sectionAngles.map((section: any) => {
             const slug = section?.data?.slug ?? ''
             const active = activeSection === slug

@@ -14,6 +14,9 @@ export interface DonutProps {
   donutData: Array<DonutSectionObject>
   withTotal: boolean
   totalClassName: string
+  donutRadius: number
+  donutInnerRadius: number
+  svgArea: number
 }
 
 export type SectionType = {
