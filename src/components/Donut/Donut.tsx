@@ -1,44 +1,19 @@
 import React, { useMemo, memo, useState, FunctionComponent } from 'react'
+import { parseData } from '../../dataParser'
+import { sectionOpacityAmount } from '../../enum'
 import { useDonutCoordinates } from '../../hooks'
 import TotalValue from '../TotalValue'
-import {
-  D3parse,
-  DataToParse,
-  DonutProps,
-  DonutSectionObject,
-  SectionType,
-} from './Donut.types'
-
-const sectionOpacityAmount = {
-  ACTIVE: '1',
-  INACTIVE: '0.6',
-}
-
-const parseData = (data: DataToParse, donutRadius: number): D3parse => {
-  const valuesArr = data.map((item: DonutSectionObject) => item.value)
-  const total = valuesArr.reduce((accum, current) => accum + current)
-
-  const getDonutVal = (val: number) => (val * donutRadius) / total
-
-  const parsedData = data.map(item => ({
-    slug: item.slug,
-    title: item.label,
-    value: getDonutVal(item.value),
-    rawValue: item.value,
-  }))
-
-  return { parsedData, total }
-}
+import { DonutProps, SectionType } from './Donut.types'
 
 const Donut: FunctionComponent<DonutProps> = ({
-  sectionColors,
+  sectionColors = ['cyan', 'pink'],
   donutData,
-  totalClassName,
-  withTotal,
+  totalClassName = 'total',
+  withTotal = true,
 }) => {
   const donutRadius = 140
   const donutInnerRadius = 15
-  const [activeSection, setActiveSection] = useState('')
+  const [activeSection, setActiveSection] = useState<string>('')
 
   const { parsedData, total } = useMemo(
     () => parseData(donutData, donutRadius),
@@ -69,6 +44,10 @@ const Donut: FunctionComponent<DonutProps> = ({
     return active ? activeArc(section) : arc(section)
   }
 
+  const clearActiveSection = (): void => {
+    setActiveSection('')
+  }
+
   return (
     <div style={{ position: 'relative' }}>
       <svg width='180' height='180'>
@@ -78,9 +57,7 @@ const Donut: FunctionComponent<DonutProps> = ({
             const active = activeSection === slug
             return (
               <path
-                onMouseLeave={() => {
-                  setActiveSection('')
-                }}
+                onMouseLeave={clearActiveSection}
                 onMouseEnter={handleActiveSection(slug)}
                 key={slug}
                 fillOpacity={handleOpacity(slug)}
