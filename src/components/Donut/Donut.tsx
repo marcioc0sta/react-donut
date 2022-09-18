@@ -1,4 +1,10 @@
-import React, { useMemo, memo, useState, FunctionComponent } from 'react'
+import React, {
+  useMemo,
+  memo,
+  useState,
+  FunctionComponent,
+  ReactElement,
+} from 'react'
 import { parseData } from '../../dataParser'
 import { sectionOpacityAmount } from '../../enum'
 import { useDonutCoordinates } from '../../hooks'
@@ -57,7 +63,7 @@ const Donut: FunctionComponent<DonutProps> = ({
             transform: `translate(${svgArea / 2}px, ${svgArea / 2}px)`,
           }}
         >
-          {sectionAngles.map((section: any) => {
+          {sectionAngles.map((section: SectionType): ReactElement => {
             const slug = section?.data?.slug ?? ''
             const active = activeSection === slug
             return (

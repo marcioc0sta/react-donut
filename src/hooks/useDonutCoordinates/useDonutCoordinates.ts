@@ -6,8 +6,8 @@ export interface DonutCoordinates {
   donutRadius: number
   donutInnerRadius: number
   parsedData: Array<{
-    slug: string
-    title: string
+    slug?: string
+    title?: string
     value: number
     rawValue: number
   }>

@@ -1,8 +1,8 @@
 export type DonutSectionObject = { slug: string; value: number; label: string }
 
 export type ParsedDataObject = {
-  slug: string
-  title: string
+  slug?: string
+  title?: string
   value: number
   rawValue: number
 }
