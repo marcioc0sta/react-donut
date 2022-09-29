@@ -8,10 +8,12 @@ import React, {
 import { parseData } from '../../dataParser'
 import { sectionOpacityAmount } from '../../enum'
 import { useDonutCoordinates } from '../../hooks'
+import Captions from '../Captions'
 import TotalValue from '../TotalValue'
 import { DonutProps, SectionType } from './Donut.types'
 
 const Donut: FunctionComponent<DonutProps> = ({
+  withCaptions = false,
   sectionColors = ['cyan', 'pink'],
   donutData,
   totalClassName = 'total',
@@ -55,6 +57,8 @@ const Donut: FunctionComponent<DonutProps> = ({
     setActiveSection('')
   }
 
+  console.log(parsedData)
+
   return (
     <div style={{ position: 'relative' }}>
       <svg width={svgArea} height={svgArea}>
@@ -84,6 +88,13 @@ const Donut: FunctionComponent<DonutProps> = ({
           coordinates={`${svgArea / 2 - 10}px`}
           totalClassName={totalClassName}
           total={total}
+        />
+      )}
+      {withCaptions && (
+        <Captions
+          captions={[
+            { val: parsedData[0].value, label: parsedData[0]?.title ?? '' },
+          ]}
         />
       )}
     </div>

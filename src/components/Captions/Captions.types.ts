@@ -1,5 +1,5 @@
 type value = {
-  val: string
+  val: number
   label: string
 }
 

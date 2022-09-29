@@ -10,6 +10,7 @@ export type DataToParse = DonutProps['donutData']
 export type D3parse = { parsedData: Array<ParsedDataObject>; total: number }
 
 export interface DonutProps {
+  withCaptions: boolean
   sectionColors: Array<string>
   donutData: Array<DonutSectionObject>
   withTotal: boolean
